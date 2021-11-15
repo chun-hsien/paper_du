@@ -1,0 +1,12 @@
+---
+title: "Du_paper analysis"
+author: "Chun Hsien Wu"
+date: "2021年11月15日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Du's data dimensionality analysis
