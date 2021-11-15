@@ -10,3 +10,52 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Du's data dimensionality analysis
+```{r}
+setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
+# reading and writing CSV files into R
+ dat <- read.csv("items.csv") 
+```
+```{r}
+# get names of colnames and rownames
+colnames(dat)
+rownames(dat) 
+
+# all the response value - 1
+dat1 <- dat -1
+
+# delete NA rows
+# now, we get clean data, the dimension of dat2 is 970*16
+dat2 <- na.omit(dat1)
+dim(dat2)
+```
+```{r}
+## because Q55 and Q58 should be deleted
+## now we got 14 items, 
+# 真有之情 Q49(主幫) Q50(年節) Q51(同安) Q52(畢聯) Q53(給驚) 共5題
+
+# 應有之情 Q54(雙接) Q56(起答) Q57(報師) Q59(師呼) Q60(信師) Q61(誠答) Q62(克尊) Q63(洗恭) Q64(舉發) 共9題
+ dat3 <- subset(dat2, select = -c(Q55, Q58))
+
+ colnames(dat3)[1:5] <- paste("T", colnames(dat3)[1:5], sep = "_")
+colnames(dat3)[6:14] <- paste("S", colnames(dat3)[6:14], sep = "_")
+
+itemcluster <- substring( colnames(dat3), 1, 1 )
+```
+```{r}
+# du's complete dat is 970*14, so cols= 14 
+score <- stats::qnorm( ( rowMeans( dat3)+.5 )  / ( 14 + 1 ) )
+
+# lo ading sirt library and DETECT Item cluster
+detect1 <- sirt::conf.detect( data=dat3, score=score, itemcluster=itemcluster )
+
+##  Exploratory DETECT 1
+detect5 <- sirt::expl.detect( data=dat3, score=score,
+                     nclusters=9, N.est=nrow(dat3)  )
+
+## Exploratory DETECT 2
+## setting number of clusters =2 and run it
+detect5 <- sirt::expl.detect( data=dat3, score=score,
+                 nclusters=2, N.est=nrow(dat3)  )
+## 
+```
+
