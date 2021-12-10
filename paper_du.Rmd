@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+## 師生關係量表之試題反應模式分析
 ### Du's data dimensionality analysis
 ```{r}
 setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
@@ -57,5 +57,47 @@ detect5 <- sirt::expl.detect( data=dat3, score=score,
 detect5 <- sirt::expl.detect( data=dat3, score=score,
                  nclusters=2, N.est=nrow(dat3)  )
 ## 
+```
+### 部份給分模式分析結果
+
+### 師生關係量表的DIF檢驗
+```{r}
+setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
+list.files(".")
+
+# loading R package
+library("mirt")
+library("lordif")
+
+#reading and writing CSV files into R
+ dat <- read.csv("item46-64.csv") 
+
+# delete NA rows , now we got dim 860*21, means we have 860 examinees, 
+dat <- na.omit(dat)
+dim(dat)
+
+# Now coding 0 as female and 1 as male factor
+dat$學生性別[dat$學生性別==0] <- "female"
+dat$學生性別[dat$學生性別==1] <- "male"
+
+# change column name
+colnames(dat)[4] <- "gender"
+
+# now  let column of dat$gender as a factor and check it
+dat$gender <- as.factor(dat$gender)
+str(dat)
+
+# distract polytomous data from dat
+dat_item <- dat[,6:21]
+
+# execute lordif DIF check
+respect <- lordif(dat_item, dat$gender, criterion = "Chisqr")
+
+# 
+respect$stats
+```
+```{r}
+# Corresponding plots can be produced as follows:
+plot(respect, labels = c("female", "male"))
 ```
 
