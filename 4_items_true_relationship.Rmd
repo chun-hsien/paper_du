@@ -1,0 +1,84 @@
+---
+title: "true_relationship for teacher and students"
+author: "Chun Hsien Wu"
+date: "2021年12月10日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+# 08.12.2021
+# Partial Credit Model for teacher and students' relationship item analysis
+# # 真有之情 Q49(主幫) Q50(年節) Q51(同安) Q52(畢聯) Q53(給驚) 共5題
+# True relationship item_49 - item_53
+rm(list=ls())
+setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
+
+# load TAM package
+library("TAM")
+
+# reading and writing CSV files into R
+ dat <- read.csv("items.csv") 
+
+# get names of colnames and rownames
+colnames(dat)
+rownames(dat) 
+```
+```{r}
+# all the response value - 1
+dat1 <- dat -1
+
+# delete NA rows, now, we get clean data, the dimension of dat2 is 970*16
+dat2 <- na.omit(dat1)
+dim(dat2)
+
+## because Q55 and Q58 should be deleted
+## now we got 14 items, 
+# 真有之情 Q49(主幫) Q50(年節) Q51(同安)Q53(給驚) 共4題
+# 刪除 Q52(畢聯) 題
+t_dat <- dat2[,-c(4,6:16)]
+
+#Run IRT analysis for partial credit model (MML estimation)
+mod1 <- tam(t_dat)
+```
+
+```{r}
+#Item parameters
+mod1$xsi
+
+#Thurstonian thresholds
+tthresh <- tam.threshold(mod1)
+tthresh
+
+#Plot Thurstonian thresholds
+par(ps=9)
+dotchart(t(tthresh), pch=19)
+```
+
+```{r}
+## to get the wrighMap plot
+library("WrightMap")
+Ability = tam.wle(mod1)
+```
+
+```{r}
+## to get the wrighMap plot
+library("WrightMap")
+Ability = tam.wle(mod1)
+
+# below, you can get the wrightMap plot
+wrightMap(Ability$theta, tthresh)
+
+#Plot expected scores curves
+plot(mod1, type= "items")
+```
+
+```{r}
+## below from page 151 
+## Applying the Rasch model in social sciences using R
+fit2 <- msq.itemfit(mod1)
+summary(fit2)
+```
+
