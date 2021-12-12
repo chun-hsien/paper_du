@@ -15,18 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
 # True relationship item_49 - item_53
 rm(list=ls())
 setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
-
 # load TAM package
 library("TAM")
 
 # reading and writing CSV files into R
  dat <- read.csv("items.csv") 
 
-# get names of colnames and rownames
-colnames(dat)
-rownames(dat) 
-```
-```{r}
 # all the response value - 1
 dat1 <- dat -1
 
@@ -64,17 +58,29 @@ Ability = tam.wle(mod1)
 ```
 
 ```{r}
-## to get the wrighMap plot
-library("WrightMap")
-Ability = tam.wle(mod1)
-
 # below, you can get the wrightMap plot
 wrightMap(Ability$theta, tthresh)
 
+#Plot and look at difficulties/thresholds
+#plot(mod1, type= "items")
+```
+
+```{r}
+# below from page 151 
+# Applying the Rasch model in social sciences using R
+fit2 <- msq.itemfit(mod1)
+summary(fit2)
+```
+```{r}
 #Plot expected scores curves
 plot(mod1, type= "items")
 ```
 
+```{r}
+#Plot expected scores curves
+plot(mod1, ask=TRUE)
+```
+Now, we should check infit and outfit indices
 ```{r}
 ## below from page 151 
 ## Applying the Rasch model in social sciences using R
