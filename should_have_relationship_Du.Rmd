@@ -17,6 +17,40 @@ knitr::opts_chunk$set(echo = TRUE)
 #Q54(雙接) Q56(起答) Q57(報師) Q59(師呼) Q60(信師) Q61(誠答) Q62(克尊) Q63(洗恭) Q64(舉發) 共9題
 # True relationship item_49 - item_53
 rm(list=ls())
-setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
+setwd("/home/son/RepTemplates/paper_du")
+```
+```{r}
+# load TAM package
+#Run IRT analysis for partial credit model (MML estimation)
+library("TAM")
+# reading and writing CSV files into R
+ dat <- read.csv("items.csv") 
+```
+
+
+```{r}
+# get names of colnames and rownames
+colnames(dat)
+rownames(dat) 
+
+# all the response value - 1
+dat1 <- dat -1
+
+# delete NA rows, now, we get clean data, the dimension of dat2 is 970*16
+dat2 <- na.omit(dat1)
+dim(dat2)
+
+## because Q55 and Q58 should be deleted
+## now we got 14 items, 
+# Q54(雙接) Q56(起答) Q57(報師) Q59(師呼) Q60(信師) Q61(誠答) Q62(克尊) Q63(洗恭) Q64(舉發) 共9題
+s_dat <- dat2[,-c(1:5)]
+```
+
+```{r}
+#Run IRT analysis for partial credit model (MML estimation)
+mod1 <- tam(s_dat)
+
+#Item parameters
+mod1$xsi
 ```
 
