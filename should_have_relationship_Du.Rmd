@@ -1,0 +1,22 @@
+---
+title: "should_relationship about teacher and students"
+author: "Chun Hsien Wu"
+date: "2021年12月17日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+# 08.12.2021
+# Partial Credit Model for teacher and students' relationship item analysis
+# # 應有之情 
+#Q54(雙接) Q56(起答) Q57(報師) Q59(師呼) Q60(信師) Q61(誠答) Q62(克尊) Q63(洗恭) Q64(舉發) 共9題
+# True relationship item_49 - item_53
+rm(list=ls())
+setwd("/home/son/刻意練習/統計模擬_實做/paper_du")
+```
+
