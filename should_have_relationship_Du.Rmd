@@ -51,11 +51,19 @@ mod1 <- tam(s_dat)
 #Item parameters
 mod1$xsi
 ```
+```{r}
+#  Plot and look at difficulties/thresholds
+plot(mod1 , type = "items")
+```
+
+
 ```{r,attr.output='style="max-height: 100px;"'}
+
 #Thurstonian thresholds
 tthresh <- tam.threshold(mod1)
 tthresh
 ```
+
 ```{r,attr.output='style="max-height: 100px;"'}
 #Plot Thurstonian thresholds
 par(ps=9)
@@ -63,6 +71,7 @@ dotchart(t(tthresh), pch=19)
 # to get the wrighMap plot
 library("WrightMap")
 Ability = tam.wle(mod1)
+```
 
 wrightMap(Ability$theta, tthresh)
 ```
