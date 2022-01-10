@@ -71,9 +71,10 @@ dotchart(t(tthresh), pch=19)
 # to get the wrighMap plot
 library("WrightMap")
 Ability = tam.wle(mod1)
+wrightMap(Ability$theta, tthresh)
 ```
 
-wrightMap(Ability$theta, tthresh)
+
 ```
 ```{r}
 #Plot expected scores curves
