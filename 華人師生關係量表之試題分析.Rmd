@@ -1,0 +1,14 @@
+---
+title: "華人師生關係量表之試題分析：部份給分模式之應用"
+author: "Chun Hsien Wu"
+date: "2022年2月22日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
