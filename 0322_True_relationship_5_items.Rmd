@@ -1,0 +1,48 @@
+---
+title: "0322_True_relationship_5_items"
+author: "Chun Hsien Wu"
+date: "2022年3月22日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+setwd("/home/son/UGLY_FROG/")
+library("TAM")
+```
+```{r}
+dat <- read.csv("items.csv") 
+# all the response value - 1
+dat1 <- dat -1
+ # delete NA rows, now, we get clean data, the dimension of dat2 is 970*16
+dat2 <- na.omit(dat1)
+t_dat <- dat2[,-c(6:16)]
+dim(t_dat)
+```
+```{r}
+mod1 <- tam(t_dat)
+tthresh <- tam.threshold(mod1)
+```
+```{r}
+tthresh
+par(ps=9)
+dotchart(t(tthresh), pch=19)
+
+```
+
+```{r}
+library("WrightMap")
+Ability = tam.wle(mod1)
+wrightMap(Ability$theta, tthresh)
+```
+```{r}
+fit2 <- msq.itemfit(mod1)
+summary(fit2)
+
+```
+
+
