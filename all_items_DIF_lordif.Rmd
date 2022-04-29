@@ -1,0 +1,65 @@
+---
+title: "all_items_DIF_lordif"
+author: "Chun Hsien Wu"
+date: "2022年4月19日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+# reading and writing CSV files into R
+ dat <- read.csv("item46-64.csv") 
+
+# delete NA rows , now we got dim 860*21, means we have 860 examinees, 
+dat <- na.omit(dat)
+dim(dat)
+
+# change column name
+colnames(dat)[4] <- "gender"
+
+# now  let column of dat$gender as a factor and check it
+gender <- dat$gender
+str(dat)
+
+# distract polytomous data from dat
+dat_item <- dat[, 6: 21]
+
+# change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_11
+names(dat_item)[1] <- "item_1"
+names(dat_item)[2] <- "item_2"
+names(dat_item)[3] <- "item_3"
+names(dat_item)[4] <- "item_4"
+names(dat_item)[5] <- "item_5"
+names(dat_item)[1] <- "item_6"
+names(dat_item)[2] <- "item_7"
+names(dat_item)[3] <- "item_8"
+names(dat_item)[4] <- "item_9"
+names(dat_item)[5] <- "item_10"
+names(dat_item)[6] <- "item_11"
+names(dat_item)[7] <- "item_12"
+names(dat_item)[8] <- "item_13"
+names(dat_item)[9] <- "item_14"
+names(dat_item)[10] <- "item_15"
+names(dat_item)[11] <- "item_16"
+
+# execute mirt and lordif package
+library("mirt")
+library("lordif") 
+```
+
+```{r}
+# execute lordif DIF check
+sexDIF<- lordif(dat_item, gender, criterion = "Chisqr", model="GPCM")
+```
+
+```{r}
+print(sexDIF)
+summary(sexDIF)
+#plot(sexDIF, labels= c("Female", "Male"))
+```
+```{r}
+plot(sexDIF)
+```
+

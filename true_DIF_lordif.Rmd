@@ -1,0 +1,51 @@
+---
+title: "true_DIF_lordif"
+author: "Chun Hsien Wu"
+date: "2022年4月13日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r,attr.output='style="max-height: 100px;"'}
+setwd("/home/son/RepTemplates/paper_du")
+library("mirt")
+library("lordif")
+```
+### true respect 5 items
+```{r}
+#reading and writing CSV files into R
+dat <- read.csv("item46-64.csv")
+# delete NA rows , now we got dim 860*21, means we have 860 examinees, 
+dat <- na.omit(dat)
+dim(dat)
+```
+```{r}
+# change column name
+colnames(dat)[4] <- "gender"
+gender <- dat$gender
+```
+
+```{r,attr.output='style="max-height: 100px;"'}
+# distract polytomous data from dat
+dat_item <- dat[,6:10]
+# change colnames from Q49 - Q53
+names(dat_item)[1] <- "item_1"
+names(dat_item)[2] <- "item_2"
+names(dat_item)[3] <- "item_3"
+names(dat_item)[4] <- "item_4"
+names(dat_item)[5] <- "item_5"
+```
+
+```{r,attr.output='style="max-height: 100px;"'}
+# execute lordif DIF check
+sexDIF<- lordif(dat_item, gender, criterion = "Chisqr", model="GPCM")
+```
+```{r}
+print(sexDIF)
+summary(sexDIF)
+plot(sexDIF, labels= c("Female", "Male"))
+```
+
+
