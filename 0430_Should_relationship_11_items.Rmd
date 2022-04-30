@@ -42,9 +42,16 @@ mod1 <- tam(dat_item)
 
 #Item parameters
 mod1$xsi
-
+```
+```{r}
 #  Plot and look at difficulties/thresholds
-plot(mod1,type = "items")
+plot(mod1 , type = "items")
+```
+
+
+```{r}
+#  Plot and look at difficulties/thresholds
+plot(mod1)
 ```
 
 ```{r}
@@ -52,8 +59,8 @@ tthresh <- tam.threshold(mod1)
 
 tthresh
 
-par(ps=9)
-dotchart(t(tthresh), pch=19)
+#par(ps=9)
+dotchart(t(tthresh))
 
 library("WrightMap")
 Ability = tam.wle(mod1)
