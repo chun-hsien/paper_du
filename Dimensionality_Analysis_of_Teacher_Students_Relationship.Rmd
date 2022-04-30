@@ -1,0 +1,76 @@
+---
+title: "Dimensionality Analysis"
+author: "Chun Hsien Wu"
+date: "2022年4月30日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Dimensionality analysis of teacher & student Relationship
+
+```{r}
+rm(list=ls())
+library("sirt")
+setwd("/home/son/UGLY_FROG/code_session")
+# reading and writing CSV files into R
+dat <- read.csv("items.csv") 
+```
+```{r}
+# all the response value - 1
+dat1 <- dat -1
+
+# delete NA rows
+# now, we get clean data, the dimension of dat2 is 970*16
+dat2 <- na.omit(dat1)
+dim(dat2)
+
+## now we got 16 items, 
+# 真有之情 Q49(主幫) Q50(年節) Q51(同安) Q52(畢聯) Q53(給驚) 共5題
+
+# 應有之情 Q54(雙接) Q55( ) Q56(起答) Q57(報師)Q58( )Q59(師呼)
+#  Q60(信師) Q61(誠答) Q62(克尊) Q63(洗恭) Q64(舉發) 共11題
+# dat3 <- subset(dat2, select = -c(Q55, Q58))
+```
+
+```{r}
+# change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_11
+names(dat2)[1] <- "T_item1"
+names(dat2)[2] <- "T_item2"
+names(dat2)[3] <- "T_item3"
+names(dat2)[4] <- "T_item4"
+names(dat2)[5] <- "T_item5"
+names(dat2)[6] <- "S_item6"
+names(dat2)[7] <- "S_item7"
+names(dat2)[8] <- "S_item8"
+names(dat2)[9] <- "S_item9"
+names(dat2)[10] <- "S_item10"
+names(dat2)[11] <- "S_item11"
+names(dat2)[12] <- "S_item12"
+names(dat2)[13] <- "S_item13"
+names(dat2)[14] <- "S_item14"
+names(dat2)[15] <- "S_item15"
+names(dat2)[16] <- "S_item16"
+
+itemcluster <- substring( colnames(dat2), 1, 1 )
+
+# du's complete dat is 970*14, so cols= 16
+score <- stats::qnorm( ( rowMeans( dat2)+.5 )  / ( 16 + 1 ) )
+```
+
+```{r}
+# lo ading sirt library and DETECT Item cluster
+detect1 <- sirt::conf.detect( data=dat2, score=score, itemcluster=itemcluster )
+
+##  Exploratory DETECT 1
+detect5 <- sirt::expl.detect( data=dat2, score=score,
+                     nclusters=9, N.est=nrow(dat2)  )
+
+## Exploratory DETECT 2
+## setting number of clusters =2 and run it
+detect5 <- sirt::expl.detect( data=dat2, score=score,
+                 nclusters=2, N.est=nrow(dat2)  )
+```
+
