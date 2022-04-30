@@ -40,6 +40,7 @@ names(dat_item)[5] <- "item_5"
 
 ```{r,attr.output='style="max-height: 100px;"'}
 # execute lordif DIF check
+library(lordif)
 sexDIF<- lordif(dat_item, gender, criterion = "Chisqr", model="GPCM")
 ```
 ```{r}

@@ -211,6 +211,7 @@ names(dat_item)[3] &lt;- &quot;item_3&quot;
 names(dat_item)[4] &lt;- &quot;item_4&quot;
 names(dat_item)[5] &lt;- &quot;item_5&quot;</code></pre>
 <pre class="r"><code># execute lordif DIF check
+library(lordif)
 sexDIF&lt;- lordif(dat_item, gender, criterion = &quot;Chisqr&quot;, model=&quot;GPCM&quot;)</code></pre>
 <pre style="max-height: 100px;"><code>## 
 Iteration: 1, Log-Lik: -5942.949, Max-Change: 1.37316
