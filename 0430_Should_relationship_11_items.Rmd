@@ -52,6 +52,19 @@ plot(mod1 , type = "items")
 ```{r}
 #  Plot and look at difficulties/thresholds
 plot(mod1)
+
+# test information function
+imod1 <- TAM::IRT.informationCurves(mod1, theta = seq(-5, 5), len = 100)
+str(imod1)
+
+# plot test information
+plot(imod1, ylab="test information")
+
+# plot standard error curve
+plot( imod1, curve_type ="se", xlim =c(-3, 2))
+
+# customized plot
+plot(imod1, curve_type = "se", xlim =c(-3, 2), ylim =c(0, 2), lwd=2, lty=3)
 ```
 
 ```{r}
