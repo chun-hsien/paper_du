@@ -46,7 +46,10 @@ sexDIF<- lordif(dat_item, gender, criterion = "Chisqr", model="GPCM")
 ```{r}
 print(sexDIF)
 summary(sexDIF)
-plot(sexDIF, labels= c("Female", "Male"))
+```
+```{r}
+#plot(sexDIF, labels= c("Female", "Male"))
+plot(sexDIF)
 ```
 
 
