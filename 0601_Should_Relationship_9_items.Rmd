@@ -1,0 +1,87 @@
+---
+title: "0601_Should_Relationship_9_items"
+author: "Chun Hsien Wu"
+date: "2022年5月7日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+rm(list=ls())
+setwd("/home/son/RepTemplates/paper_du")
+library("TAM")
+
+dat_item <- read.csv("12_3_45_item49-64.csv") 
+
+# distract polytomous data from dat
+dat_item <- dat_item[, 11:21]
+dat_item <- dat_item[,-c(2)]
+dat_item <- dat_item[,-c(4)]
+
+dat_item <- na.omit(dat_item)
+
+dat_item <- dat_item - 1
+dim(dat_item)
+```
+
+```{r}
+# delete Q55()  Q58()
+# change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_9
+names(dat_item)[1] <- "6"
+names(dat_item)[2] <- "7"
+names(dat_item)[3] <- "8"
+names(dat_item)[4] <- "9"
+names(dat_item)[5] <- "10"
+names(dat_item)[6] <- "11"
+names(dat_item)[7] <- "12"
+names(dat_item)[8] <- "13"
+names(dat_item)[9] <- "14"
+
+mod1 <- tam(dat_item)
+
+#Item parameters
+mod1$xsi
+
+#  Plot and look at difficulties/thresholds
+plot(mod1 , type = "items")
+
+#Plot expected scores curves
+plot(mod1)
+```
+
+```{r}
+# test information function
+imod1 <- TAM::IRT.informationCurves(mod1, theta = seq(-5, 5), len = 100)
+str(imod1)
+
+# plot test information
+plot(imod1, ylab="test information")
+
+# plot standard error curve
+plot( imod1, curve_type ="se", xlim =c(-3, 2))
+
+# customized plot
+plot(imod1, curve_type = "se", xlim =c(-3, 2), ylim =c(0, 2), lwd=2, lty=3)
+```
+
+```{r}
+tthresh <- tam.threshold(mod1)
+
+tthresh
+
+#par(ps=9)
+#dotchart(t(tthresh), pch=19)
+
+library("WrightMap")
+Ability = tam.wle(mod1)
+
+wrightMap(Ability$theta, tthresh)
+
+fit2 <- msq.itemfit(mod1)
+summary(fit2)
+```
+
