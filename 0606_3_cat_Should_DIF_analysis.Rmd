@@ -1,0 +1,251 @@
+---
+title: "0606_3_cat_Should_DIF_analysis"
+author: "Chun Hsien Wu"
+date: "2022年6月6日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 3 categories Should have relationships between teacher and students's  DIF analysis
+```{r}
+# 22.06.06
+# teacher and students should have relationships 9 items
+# 3 categories Should have relationships between teacher and students's  DIF analysis
+
+rm(list=ls())
+#setwd("/home/son/UGLY_FROG/code_session")
+setwd("/home/son/RepTemplates/paper_du")
+library("eRm")
+```
+```{r}
+# reading and writing CSV files into R
+ dat <- read.csv("12_3_45_item49-64.csv") 
+
+# delete NA rows , now we got dim 860*21, means we have 860 examinees, 
+dat <- na.omit(dat)
+dim(dat)
+
+# change column name
+colnames(dat)[4] <- "gender"
+
+# start to divided groups
+subgroups <- dat$gender
+
+# distract polytomous data from dat
+dat_item <- dat[, 11:21]
+dat_item <- dat_item[,-c(2)]
+dat_item <- dat_item[,-c(4)]
+
+dat_item <- dat_item -1
+
+# change colnames from Q49 - Q53
+names(dat_item)[1] <- "item_6"
+names(dat_item)[2] <- "item_7"
+names(dat_item)[3] <- "item_8"
+names(dat_item)[4] <- "item_9"
+names(dat_item)[5] <- "item_10"
+names(dat_item)[6] <- "item_11"
+names(dat_item)[7] <- "item_12"
+names(dat_item)[8] <- "item_13"
+names(dat_item)[9] <- "item_14"
+```
+#### Analyze the data using the Partial Credit model:
+```{r}
+PC_model <- PCM(dat_item)
+
+group1_item.diffs.overall <- NULL
+group2_item.diffs.overall <- NULL
+
+# update this if needed with the responses object
+responses <- dat_item 
+
+# update this if needed with the model results object
+model.results <- PC_model 
+
+responses.g <- cbind.data.frame(subgroups, responses)
+responses.g1 <- subset(responses.g, responses.g$subgroups == 0)
+responses.g2 <- subset(responses.g, responses.g$subgroups == 1)
+
+## Compare thresholds between groups:
+subgroup_diffs <- Waldtest(PC_model, splitcr = subgroups)
+
+for(item.number in 1:ncol(responses)){
+	n.thresholds.g1 <-  length(table(responses.g1[, item.number+1]))-1
+	
+	group1_item.diffs.overall[item.number] <- mean(subgroup_diffs$betapar1[((item.number*(n.thresholds.g1))-(n.thresholds.g1-1)): 
+        	(item.number*(n.thresholds.g1))])*-1
+  
+	n.thresholds.g2 <-  length(table(responses.g2[, item.number+1]))-1
+	group2_item.diffs.overall[item.number] <- mean(subgroup_diffs$betapar2[((item.number*(n.thresholds.g2))-(n.thresholds.g2-1)): 
+        	(item.number*(n.thresholds.g2))])*-1
+}
+
+group1_item.diffs.overall
+group2_item.diffs.overall
+```
+####Get overall item SE values:
+```{r}
+#-First, get overall SEs specific to each subgroup:
+
+group1_item.se.overall <- NULL
+group2_item.se.overall <- NULL
+
+responses <- dat_item # update this if needed with the responses object
+model.results <- PC_model # update this if needed with the model results object
+
+responses.g <- cbind.data.frame(subgroups, responses)
+responses.g1 <- subset(responses.g, responses.g$subgroups == 0)
+responses.g2 <- subset(responses.g, responses.g$subgroups == 1)
+
+subgroup_diffs <- Waldtest(PC_model, splitcr = subgroups)
+
+for(item.number in 1:ncol(responses)){
+	n.thresholds.g1 <-  length(table(responses.g1[, item.number+1]))-1
+	group1_item.se.overall[item.number] <- mean(subgroup_diffs$se.beta1[((item.number*(n.thresholds.g1))-(n.thresholds.g1-1)): 
+        	(item.number*(n.thresholds.g1))])
+  
+	n.thresholds.g2 <-  length(table(responses.g2[, item.number+1]))-1
+	group2_item.se.overall[item.number] <- mean(subgroup_diffs$se.beta2[((item.number*(n.thresholds.g2))-(n.thresholds.g2-1)): 
+        	(item.number*(n.thresholds.g2))])
+}
+
+group1_item.se.overall
+group2_item.se.overall
+
+# Calculate test statistics for item comparisons:
+z <- (group1_item.diffs.overall - group2_item.diffs.overall)/
+sqrt(group1_item.se.overall^2 + group2_item.se.overall^2)
+
+# view test statistics in the console:
+z
+```
+#### Plot the test statistics:
+```{r}
+min.y <- ifelse(ceiling(min(z)) > -3, -3, 
+                ceiling(min(z)))
+
+max.y <- ifelse(ceiling(max(z)) < 3, 3, 
+                ceiling(max(z)))
+
+plot(z, ylim = c(min.y, max.y),
+     ylab = "Z值", xlab = "試題", main = "性別在應有之情試題之差異試題功能檢定統計量",
+     axes=FALSE)
+axis(1, at = c(1, 2, 3, 4, 5, 6, 7, 8, 9), labels = c(6, 7, 8, 9, 10, 11, 12, 13, 14))
+axis(2)
+abline(h=2, col = "red", lty = 2)
+abline(h=-2, col = "red", lty = 2)
+
+legend("topright", c("Z 統計量", "顯著差異邊界"),
+       pch = c(1, NA), lty = c(NA, 2), col = c("black", "red"), cex = .7)
+```
+
+#### Export item comparison results:
+```{r}
+comparison.results <- cbind.data.frame(c(1:length(group1_item.diffs.overall)),
+                                       group1_item.diffs.overall, group1_item.se.overall,
+                                       group2_item.diffs.overall, group2_item.se.overall,
+                                       z)
+
+names(comparison.results) <- c("Item",
+                               "Subgroup_1_Difficulty", "Subgroup_1_SE",
+                               "Subgroup_2_Difficulty", "Subgroup_2_SE",
+                               "Z")
+
+comparison.results <- round(comparison.results, digits = 2)
+write.csv(comparison.results, file = "PCM_comparison_results.csv", row.names = FALSE)
+```
+#### Create scatterplot of item measures with 95% confidence bands
+```{r}
+### DIF Scatterplot:
+
+## First, calculate values for constructing the confidence bands:
+
+mean.1.2 <- ((group1_item.diffs.overall - mean(group1_item.diffs.overall))/2*sd(group1_item.diffs.overall) +
+               (group2_item.diffs.overall - mean(group2_item.diffs.overall))/2*sd(group2_item.diffs.overall))
+
+joint.se <- sqrt((group1_item.se.overall^2/sd(group1_item.diffs.overall)) +
+                   (group2_item.se.overall^2/sd(group2_item.diffs.overall)))
+
+
+upper.group.1 <- mean(group1_item.diffs.overall) + ((mean.1.2 - joint.se )*sd(group1_item.diffs.overall))
+upper.group.2 <- mean(group2_item.diffs.overall) + ((mean.1.2 + joint.se )*sd(group2_item.diffs.overall))
+
+lower.group.1 <- mean(group1_item.diffs.overall) + ((mean.1.2 + joint.se )*sd(group1_item.diffs.overall))
+lower.group.2 <- mean(group2_item.diffs.overall) + ((mean.1.2 - joint.se )*sd(group1_item.diffs.overall))
+
+
+upper <- cbind.data.frame(upper.group.1, upper.group.2)
+upper <- upper[order(upper$upper.group.1, decreasing = FALSE),]
+
+
+lower <- cbind.data.frame(lower.group.1, lower.group.2)
+lower <- lower[order(lower$lower.group.1, decreasing = FALSE),]
+
+## make the scatterplot:
+plot(group1_item.diffs.overall, group2_item.diffs.overall, xlim = c(-3, 3), ylim = c(-3, 3),
+     xlab = "Group 1", ylab = "Group 2", main = "Group 1 Measures \n plotted against \n Group 2 Measures")
+abline(a = 0, b = 1, col = "purple")
+
+par(new = T)
+
+lines(upper$upper.group.1, upper$upper.group.2, lty = 2, col = "red")
+
+lines(lower$lower.group.1, lower$lower.group.2, lty = 2, col = "red")
+
+legend("bottomright", c("Item Location", "Identity Line", "95% Confidence Band"),
+       pch = c(1, NA, NA), lty = c(NA, 1, 2), col = c("black", "purple", "red"))
+```
+
+#### Create bar plot of item difference
+##### Bar plot of item differences:
+```{r}
+# First, calculate difference in difficulty between subgroups
+item_dif <- group1_item.diffs.overall - group2_item.diffs.overall
+
+# Code to use different colors to highlight items with differences >= .5 logits:
+colors <- NULL
+
+for (item.number in 1:ncol(responses)){
+  colors[item.number] <- ifelse(abs(item_dif[item.number]) > .5, "dark blue", "light green")
+}
+
+# Bar plot code:
+item_dif <- as.vector(item_dif)
+
+x <- barplot(item_dif, horiz = TRUE, xlim = c(-2, 2), 
+             col = colors,
+             #=ylim = c(1,4), 
+             xlab = "Logit Difference")
+
+# code to add labels to the plot:
+
+dif_labs <- NULL
+
+for (i in 1:length(group1_item.diffs.overall)) {
+  dif_labs[i] <- ifelse(item_dif[i] < 0, item_dif[i] - .2,
+                        item_dif[i] + .2)
+}
+
+#text(dif_labs, x, labels = c(1:length(group1_item.diffs.overall)),
+#     xlim = c(-1.5, 1.5), cex = .8)
+
+text(dif_labs, x, labels = c( 6: 14),
+     xlim = c(-1.5, 1.5), cex = .8)
+
+# add vertical lines to highlight .5 logit differences:
+abline(v = .5, lty = 3)
+abline(v = -.5, lty = 3)
+
+# add additional text to help with interpretation:
+
+text(-1, 4.5, "Easier to Endorse for Group 1", cex = .8)
+text(1, 4.5, "Easier to Endorse for Group 2", cex = .8)
+
+legend("bottomright", c("Diff >= .5 logits", "Diff < .5 logits"),
+       pch = 15, col = c("dark blue", "light green"), cex = .7 )
+```
+
+
