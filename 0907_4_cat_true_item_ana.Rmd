@@ -1,0 +1,23 @@
+---
+title: "0907_4_cat_true_item_ana"
+author: "Chun Hsien Wu"
+date: '2022-09-07'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+setwd("/home/son/RepTemplates/paper_du")
+library("TAM")
+```
+#### load data
+```{r}
+dat_item <- read.csv("item49-64.csv") 
+# distract polytomous data from dat
+dat_item <- dat_item[, 6: 10]
+dat_item <- na.omit(dat_item)
+
+dat_item <- dat_item - 1
+dim(dat_item)
+```
