@@ -1,0 +1,85 @@
+---
+title: "1_2_34_5 true_analysis"
+author: "Chun Hsien Wu"
+date: '2022-09-26'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### 1_2_34_5 true relationship PCM analysis
+```{r}
+rm(list=ls())
+setwd("/home/son/RepTemplates/paper_du")
+library("TAM")
+```
+```{r}
+dat_item <- read.csv("1_2_34_5.csv") 
+# distract polytomous data from dat
+dat_item <- dat_item[, 6: 10]
+dat_item <- na.omit(dat_item)
+
+dat_item <- dat_item - 1
+dim(dat_item)
+```
+```{r}
+# change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_11
+names(dat_item)[1] <- "1"
+names(dat_item)[2] <- "2"
+names(dat_item)[3] <- "3"
+names(dat_item)[4] <- "4"
+names(dat_item)[5] <- "5"
+```
+```{r,attr.output='style="max-height: 100px;"'}
+mod1 <- tam(dat_item)
+```
+```{r}
+# test information function
+imod1 <- TAM::IRT.informationCurves(mod1, theta = seq(-5, 5), len = 100)
+str(imod1)
+```
+```{r}
+# plot test information
+plot(imod1, ylab="test information")
+```
+```{r}
+# plot standard error curve
+plot( imod1, curve_type ="se", xlim =c(-3, 2))
+```
+```{r}
+# customized plot
+plot(imod1, curve_type = "se", xlim =c(-3, 2), ylim =c(0, 2), lwd=2, lty=3)
+
+#Item parameters
+mod1$xsi
+```
+```{r}
+#  Plot and look at difficulties/thresholds
+plot(mod1 , type = "items")
+```
+```{r}
+#Plot expected scores curves
+plot(mod1)
+```
+```{r}
+tthresh <- tam.threshold(mod1)
+tthresh
+```
+```{r}
+par(ps=9)
+dotchart(t(tthresh), pch=19)
+```
+```{r}
+library("WrightMap")
+Ability = tam.wle(mod1)
+```
+```{r}
+wrightMap(Ability$theta, tthresh)
+```
+```{r}
+fit2 <- msq.itemfit(mod1)
+summary(fit2)
+```
+
