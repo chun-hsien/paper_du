@@ -384,7 +384,7 @@ library(&quot;TAM&quot;)</code></pre>
 <pre><code>## * TAM 4.1-4 (2022-08-28 16:03:54)</code></pre>
 <pre class="r"><code>dat_item &lt;- read.csv(&quot;12_3_4_5.csv&quot;) 
 # distract polytomous data from dat
-dat_item &lt;- dat_item[, 6: 10]
+dat_item &lt;- dat_item[, 1: 5]
 dat_item &lt;- na.omit(dat_item)
 
 dat_item &lt;- dat_item - 1
@@ -398,13 +398,13 @@ names(dat_item)[4] &lt;- &quot;4&quot;
 names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 <pre class="r"><code>mod1 &lt;- tam(dat_item)</code></pre>
 <pre style="max-height: 100px;"><code>## ....................................................
-## Processing Data      2022-09-26 20:56:03 
+## Processing Data      2022-09-27 10:54:46 
 ##     * Response Data: 1015 Persons and  5 Items 
 ##     * Numerical integration with 21 nodes
-##     * Created Design Matrices   ( 2022-09-26 20:56:03 )
-##     * Calculated Sufficient Statistics   ( 2022-09-26 20:56:03 )
+##     * Created Design Matrices   ( 2022-09-27 10:54:46 )
+##     * Calculated Sufficient Statistics   ( 2022-09-27 10:54:46 )
 ## ....................................................
-## Iteration 1     2022-09-26 20:56:03
+## Iteration 1     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11938.9777
@@ -413,7 +413,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.482166
 ## ....................................................
-## Iteration 2     2022-09-26 20:56:03
+## Iteration 2     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11616.8453 | Absolute change: 322.1324 | Relative change: 0.02772976
@@ -422,7 +422,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.150959
 ## ....................................................
-## Iteration 3     2022-09-26 20:56:03
+## Iteration 3     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11600.9595 | Absolute change: 15.8858 | Relative change: 0.00136936
@@ -431,7 +431,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.105819
 ## ....................................................
-## Iteration 4     2022-09-26 20:56:03
+## Iteration 4     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11594.4488 | Absolute change: 6.5107 | Relative change: 0.00056153
@@ -440,7 +440,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.084767
 ## ....................................................
-## Iteration 5     2022-09-26 20:56:03
+## Iteration 5     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11591.1312 | Absolute change: 3.3176 | Relative change: 0.00028622
@@ -449,7 +449,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.068039
 ## ....................................................
-## Iteration 6     2022-09-26 20:56:03
+## Iteration 6     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11589.0386 | Absolute change: 2.0926 | Relative change: 0.00018057
@@ -458,7 +458,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.054617
 ## ....................................................
-## Iteration 7     2022-09-26 20:56:03
+## Iteration 7     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11587.6816 | Absolute change: 1.357 | Relative change: 0.0001171
@@ -467,7 +467,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.043355
 ## ....................................................
-## Iteration 8     2022-09-26 20:56:03
+## Iteration 8     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11586.7848 | Absolute change: 0.8969 | Relative change: 7.74e-05
@@ -476,7 +476,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.03465
 ## ....................................................
-## Iteration 9     2022-09-26 20:56:03
+## Iteration 9     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11586.1827 | Absolute change: 0.602 | Relative change: 5.196e-05
@@ -485,7 +485,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.027637
 ## ....................................................
-## Iteration 10     2022-09-26 20:56:03
+## Iteration 10     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11585.7715 | Absolute change: 0.4113 | Relative change: 3.55e-05
@@ -494,7 +494,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.022268
 ## ....................................................
-## Iteration 11     2022-09-26 20:56:03
+## Iteration 11     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11585.4873 | Absolute change: 0.2842 | Relative change: 2.453e-05
@@ -503,7 +503,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.017917
 ## ....................................................
-## Iteration 12     2022-09-26 20:56:03
+## Iteration 12     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11585.2876 | Absolute change: 0.1997 | Relative change: 1.724e-05
@@ -512,7 +512,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.014484
 ## ....................................................
-## Iteration 13     2022-09-26 20:56:03
+## Iteration 13     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11585.1465 | Absolute change: 0.1411 | Relative change: 1.218e-05
@@ -521,7 +521,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.011761
 ## ....................................................
-## Iteration 14     2022-09-26 20:56:03
+## Iteration 14     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11585.0454 | Absolute change: 0.1011 | Relative change: 8.72e-06
@@ -530,7 +530,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.00964
 ## ....................................................
-## Iteration 15     2022-09-26 20:56:03
+## Iteration 15     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.9717 | Absolute change: 0.0737 | Relative change: 6.36e-06
@@ -539,7 +539,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.007871
 ## ....................................................
-## Iteration 16     2022-09-26 20:56:03
+## Iteration 16     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.9173 | Absolute change: 0.0544 | Relative change: 4.69e-06
@@ -548,7 +548,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.00652
 ## ....................................................
-## Iteration 17     2022-09-26 20:56:03
+## Iteration 17     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.8769 | Absolute change: 0.0404 | Relative change: 3.49e-06
@@ -557,7 +557,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.00539
 ## ....................................................
-## Iteration 18     2022-09-26 20:56:03
+## Iteration 18     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.847 | Absolute change: 0.0299 | Relative change: 2.58e-06
@@ -566,7 +566,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.004506
 ## ....................................................
-## Iteration 19     2022-09-26 20:56:03
+## Iteration 19     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.8245 | Absolute change: 0.0225 | Relative change: 1.95e-06
@@ -575,7 +575,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.003749
 ## ....................................................
-## Iteration 20     2022-09-26 20:56:03
+## Iteration 20     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.8074 | Absolute change: 0.0171 | Relative change: 1.48e-06
@@ -584,7 +584,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.003183
 ## ....................................................
-## Iteration 21     2022-09-26 20:56:03
+## Iteration 21     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7944 | Absolute change: 0.013 | Relative change: 1.12e-06
@@ -593,7 +593,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.002639
 ## ....................................................
-## Iteration 22     2022-09-26 20:56:03
+## Iteration 22     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7845 | Absolute change: 0.0099 | Relative change: 8.5e-07
@@ -602,7 +602,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.002217
 ## ....................................................
-## Iteration 23     2022-09-26 20:56:03
+## Iteration 23     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7769 | Absolute change: 0.0076 | Relative change: 6.6e-07
@@ -611,7 +611,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.00185
 ## ....................................................
-## Iteration 24     2022-09-26 20:56:03
+## Iteration 24     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7709 | Absolute change: 0.0059 | Relative change: 5.1e-07
@@ -620,7 +620,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.001554
 ## ....................................................
-## Iteration 25     2022-09-26 20:56:03
+## Iteration 25     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7664 | Absolute change: 0.0046 | Relative change: 4e-07
@@ -629,7 +629,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.001313
 ## ....................................................
-## Iteration 26     2022-09-26 20:56:03
+## Iteration 26     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7628 | Absolute change: 0.0035 | Relative change: 3e-07
@@ -638,7 +638,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.001136
 ## ....................................................
-## Iteration 27     2022-09-26 20:56:03
+## Iteration 27     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7601 | Absolute change: 0.0027 | Relative change: 2.4e-07
@@ -647,7 +647,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000966
 ## ....................................................
-## Iteration 28     2022-09-26 20:56:03
+## Iteration 28     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.758 | Absolute change: 0.0021 | Relative change: 1.9e-07
@@ -656,7 +656,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000823
 ## ....................................................
-## Iteration 29     2022-09-26 20:56:03
+## Iteration 29     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7563 | Absolute change: 0.0017 | Relative change: 1.5e-07
@@ -665,7 +665,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000705
 ## ....................................................
-## Iteration 30     2022-09-26 20:56:03
+## Iteration 30     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.755 | Absolute change: 0.0013 | Relative change: 1.1e-07
@@ -674,7 +674,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000606
 ## ....................................................
-## Iteration 31     2022-09-26 20:56:03
+## Iteration 31     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7539 | Absolute change: 0.001 | Relative change: 9e-08
@@ -683,7 +683,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000523
 ## ....................................................
-## Iteration 32     2022-09-26 20:56:03
+## Iteration 32     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7531 | Absolute change: 8e-04 | Relative change: 7e-08
@@ -692,7 +692,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000454
 ## ....................................................
-## Iteration 33     2022-09-26 20:56:03
+## Iteration 33     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7525 | Absolute change: 6e-04 | Relative change: 6e-08
@@ -701,7 +701,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000395
 ## ....................................................
-## Iteration 34     2022-09-26 20:56:03
+## Iteration 34     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.752 | Absolute change: 5e-04 | Relative change: 4e-08
@@ -710,7 +710,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000344
 ## ....................................................
-## Iteration 35     2022-09-26 20:56:03
+## Iteration 35     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7516 | Absolute change: 4e-04 | Relative change: 3e-08
@@ -719,7 +719,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000301
 ## ....................................................
-## Iteration 36     2022-09-26 20:56:03
+## Iteration 36     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7512 | Absolute change: 3e-04 | Relative change: 3e-08
@@ -728,7 +728,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000264
 ## ....................................................
-## Iteration 37     2022-09-26 20:56:03
+## Iteration 37     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.751 | Absolute change: 2e-04 | Relative change: 2e-08
@@ -737,7 +737,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000232
 ## ....................................................
-## Iteration 38     2022-09-26 20:56:03
+## Iteration 38     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7508 | Absolute change: 2e-04 | Relative change: 2e-08
@@ -746,7 +746,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000204
 ## ....................................................
-## Iteration 39     2022-09-26 20:56:03
+## Iteration 39     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7507 | Absolute change: 2e-04 | Relative change: 1e-08
@@ -755,7 +755,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000179
 ## ....................................................
-## Iteration 40     2022-09-26 20:56:03
+## Iteration 40     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |----
 ##   Deviance = 11584.7505 | Absolute change: 1e-04 | Relative change: 1e-08
@@ -764,7 +764,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000158
 ## ....................................................
-## Iteration 41     2022-09-26 20:56:03
+## Iteration 41     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |---
 ##   Deviance = 11584.7504 | Absolute change: 1e-04 | Relative change: 1e-08
@@ -773,7 +773,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.00014
 ## ....................................................
-## Iteration 42     2022-09-26 20:56:03
+## Iteration 42     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |---
 ##   Deviance = 11584.7503 | Absolute change: 1e-04 | Relative change: 1e-08
@@ -782,7 +782,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000136
 ## ....................................................
-## Iteration 43     2022-09-26 20:56:03
+## Iteration 43     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |---
 ##   Deviance = 11584.7503 | Absolute change: 1e-04 | Relative change: 1e-08
@@ -791,7 +791,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000123
 ## ....................................................
-## Iteration 44     2022-09-26 20:56:03
+## Iteration 44     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |--
 ##   Deviance = 11584.7502 | Absolute change: 1e-04 | Relative change: 0
@@ -800,7 +800,7 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ##   Maximum regression parameter change: 0
 ##   Maximum variance parameter change: 0.000109
 ## ....................................................
-## Iteration 45     2022-09-26 20:56:03
+## Iteration 45     2022-09-27 10:54:46
 ## E Step
 ## M Step Intercepts   |--
 ##   Deviance = 11584.7502 | Absolute change: 0 | Relative change: 0
@@ -840,9 +840,9 @@ names(dat_item)[5] &lt;- &quot;5&quot;</code></pre>
 ## [1] 0.823
 ## 
 ## -----------------------------
-## Start:  2022-09-26 20:56:03
-## End:  2022-09-26 20:56:03 
-## Time difference of 0.2914903 secs</code></pre>
+## Start:  2022-09-27 10:54:46
+## End:  2022-09-27 10:54:46 
+## Time difference of 0.2877905 secs</code></pre>
 <pre class="r"><code># test information function
 imod1 &lt;- TAM::IRT.informationCurves(mod1, theta = seq(-5, 5), len = 100)
 str(imod1)</code></pre>
@@ -950,9 +950,9 @@ summary(fit2)</code></pre>
 ## TAM 4.1-4 (2022-08-28 16:03:54) 
 ## R version 3.6.3 (2020-02-29) x86_64, linux-gnu | nodename=son-aspirev3551g | login=son 
 ## 
-## Date of Analysis: 2022-09-26 20:56:09 
-## Time difference of 0.08583903 secs
-## Computation time: 0.08583903 
+## Date of Analysis: 2022-09-27 10:54:52 
+## Time difference of 0.08508444 secs
+## Computation time: 0.08508444 
 ## 
 ## MSQ item fit statitics (Function &#39;msq.itemfit&#39;)
 ## 

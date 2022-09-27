@@ -18,7 +18,7 @@ library("TAM")
 ```{r}
 dat_item <- read.csv("1_23_4_5.csv") 
 # distract polytomous data from dat
-dat_item <- dat_item[, 6: 10]
+dat_item <- dat_item[, 1: 5]
 dat_item <- na.omit(dat_item)
 
 dat_item <- dat_item - 1

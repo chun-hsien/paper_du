@@ -1,5 +1,5 @@
 ---
-title: "1_2_34_5 true_analysis"
+title: "1_2_34_5_should_analysis"
 author: "Chun Hsien Wu"
 date: '2022-09-26'
 output: html_document
@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#### 1_2_34_5 true relationship PCM analysis
+#### 1_23_4_5 should relationship PCM analysis
 ```{r}
 rm(list=ls())
 setwd("/home/son/RepTemplates/paper_du")
@@ -18,7 +18,7 @@ library("TAM")
 ```{r}
 dat_item <- read.csv("1_2_34_5.csv") 
 # distract polytomous data from dat
-dat_item <- dat_item[, 1: 5]
+dat_item <- dat_item[, 6: 14]
 dat_item <- na.omit(dat_item)
 
 dat_item <- dat_item - 1
@@ -26,11 +26,15 @@ dim(dat_item)
 ```
 ```{r}
 # change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_11
-names(dat_item)[1] <- "1"
-names(dat_item)[2] <- "2"
-names(dat_item)[3] <- "3"
-names(dat_item)[4] <- "4"
-names(dat_item)[5] <- "5"
+names(dat_item)[1] <- "6"
+names(dat_item)[2] <- "7"
+names(dat_item)[3] <- "8"
+names(dat_item)[4] <- "9"
+names(dat_item)[5] <- "10"
+names(dat_item)[6] <- "11"
+names(dat_item)[7] <- "12"
+names(dat_item)[8] <- "13"
+names(dat_item)[9] <- "14"
 ```
 ```{r,attr.output='style="max-height: 100px;"'}
 mod1 <- tam(dat_item)
