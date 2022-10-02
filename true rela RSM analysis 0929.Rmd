@@ -1,0 +1,65 @@
+---
+title: "true RSM analysis 0929"
+author: "Chun Hsien Wu"
+date: '2022-09-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### RSM analysis for teacher student relationships 
+```{r}
+rm(list=ls())
+setwd("/home/son/RepTemplates/paper_du")
+library("TAM")
+```
+```{r}
+dat_item <- read.csv("14_items.csv") 
+# distract polytomous data from dat
+dat_item <- dat_item[, 1: 5]
+dat_item <- na.omit(dat_item)
+dat_item <- dat_item - 1
+dim(dat_item)
+```
+```{r}
+# change colnames fromQ54 to Q64, change it to item_1, item_2, ..., item_11
+names(dat_item)[1] <- "1"
+names(dat_item)[2] <- "2"
+names(dat_item)[3] <- "3"
+names(dat_item)[4] <- "4"
+names(dat_item)[5] <- "5"
+```
+```{r}
+mod_rsm <- tam.mml(dat_item, irtmodel = "RSM")
+```
+```{r}
+xsi_rsm <- mod_rsm$xsi
+#note the differences - this is the RSM
+xsi_rsm
+```
+```{r}
+#delta_tau for RSM
+mod_rsm$item_irt[1:5, ]
+```
+```{r}
+plot(mod_rsm, type = "items", high = 5, items = c(1:5), export = F)
+```
+```{r}
+# Plot the Variable Map
+library(WrightMap)
+#graphics.off() # In case you can not run the plot correctly
+IRT.WrightMap(mod_rsm,show.thr.lab=TRUE) 
+```
+#### Expected Response Curve
+```{r}
+# Plot expected response curves 
+plot(mod_rsm,ask=FALSE)
+```
+#### Person estimates and fit Statistics
+```{r}
+# Use the tam.wle function to acheive the person ability
+person_ability <- tam.wle(mod_rsm)
+```
+

@@ -41,6 +41,14 @@ imod1 <- TAM::IRT.informationCurves(mod1, theta = seq(-5, 5), len = 100)
 str(imod1)
 ```
 ```{r}
+xsi <- mod1$xsi
+# Delta-tau parameters
+delta_tau <- mod1$item_irt
+delta_tau
+```
+
+
+```{r}
 # plot test information
 plot(imod1, ylab="test information")
 ```
